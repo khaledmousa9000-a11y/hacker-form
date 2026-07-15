@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Direct Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .open-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.2s ease, visibility 0.2s;
+        }
+
+        .modal-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal-box {
+            background-color: #222;
+            color: white;
+            padding: 25px;
+            border-radius: 6px;
+            width: 320px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0 16px 0;
+            background: #333;
+            border: 1px solid #444;
+            color: white;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        button[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .cancel-btn {
+            background-color: #555;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="open-btn" onclick="toggleModal(true)">Open Form</button>
+
+    <div class="modal-overlay" id="myModal">
+        <div class="modal-box">
+            <h3>Send to My Gmail</h3>
+            
+            <!-- FIXED: Your correct endpoint link with POST method enabled -->
+            <form action="https://formspree.io/f/xpqvqzjb" method="POST">
+                
+                <label>Your Name:</label>
+                <input type="text" name="Name" required placeholder="ENTER YOUR FULL NAME HERE">
+
+                <label>Your Message:</label>
+                <textarea name="Message" rows="4" required placeholder="TYPE YOUR MESSAGE DETAILS HERE"></textarea>
+
+                <div class="buttons">
+                    <button type="button" class="cancel-btn" onclick="toggleModal(false)">Cancel</button>
+                    <button type="submit">Confirm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('myModal');
+        function toggleModal(show) {
+            if (show) modal.classList.add('active');
+            else modal.classList.remove('active');
+        }
+    </script>
+</body>
+</html>
